@@ -9,7 +9,8 @@ export class ProductDto {
   description: string;
   origin: string;
   certifications: string[];
-  harvestDate: string;
+  harvestDate: Date;
   supplier: string;
   nutritionalInfo?: NutritionalInfoDto;
+  imageUrl: string;
 }
