@@ -1,7 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
 import { NutritionalInfo } from './nutritional-info.entity';
 
-@Entity()
+@Entity('product')
 export class Product {
   @PrimaryGeneratedColumn()
   id: number;
@@ -27,13 +33,20 @@ export class Product {
   @Column('simple-array')
   certifications: string[];
 
-  @Column()
-  harvestDate: string;
+  @Column({ nullable: true })
+  harvestDate: Date;
 
   @Column()
   supplier: string;
 
-  @OneToOne(() => NutritionalInfo, { cascade: true, eager: true, nullable: true })
+  @OneToOne(() => NutritionalInfo, {
+    cascade: true,
+    eager: true,
+    nullable: true,
+  })
   @JoinColumn()
   nutritionalInfo?: NutritionalInfo;
+
+  @Column()
+  imageUrl: string;
 }

@@ -1,98 +1,99 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Agricapital Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Este proyecto es el backend del aplicativo AgriMarket encargado de proveer servicios API-REST para obtener todos los 
+productos en base de datos y un producto específico por su ID.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🧩 Stack tecnológico
 
-## Description
+- **Lenguaje**: TypeScript
+- **Framework**: [NestJS](https://nestjs.com)
+- **Base de Datos**: PostgreSQL
+- **ORM**: TypeORM
+- **Gestor de Dependencias**: npm
+- **Documentación API**: Swagger
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Patrón de Desarrollo
 
-## Project setup
+El proyecto sigue el patrón de diseño **Modelo-Vista-Controlador (MVC)**, con una clara separación de responsabilidades:
+- **Controladores**: Gestionan las solicitudes HTTP y delegan la lógica al servicio correspondiente.
+- **Servicios**: Contienen la lógica de negocio.
+- **DTOs**: Se utilizan para la transferencia de datos entre capas.
+- **Entidades**: Representan las tablas de la base de datos y son gestionadas por TypeORM.
+- **Repositorios**: Encapsulan la lógica de acceso a datos y permiten realizar consultas a la base de datos.
 
-```bash
-$ npm install
-```
+## Arquitectura
 
-## Compile and run the project
+El proyecto está diseñado bajo una arquitectura modular, característica de NestJS, lo que permite una alta escalabilidad
+y mantenibilidad. Cada módulo agrupa controladores, servicios y otros componentes relacionados.
+
+
+## 📁 Estructura del Proyecto
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+src/
+├── main.ts
+├── app.module.ts      
+├── product/   
+│   ├── commons/
+│   │   └── builder/  #Clase encargada de aplicar el patrón builder
+│   │   └── dtos/     # DTOs de entrada/salida 
+│   │   └── mappers/  # Mapean de entidades a DTOs
+│   ├── controllers/  # Controladores de la API
+│   ├── models/       # Entidades del dominio           
+│   ├── repository/   # lógica de acceso a datos                 
+│   ├── services/     # lógica de negocio.                               
+│   └── products.module.ts         
 ```
 
-## Run tests
+## 📡 Endpoints de la API
+
+| Método | Ruta            | Descripción                        | Cuerpo requerido |
+|--------|-----------------|------------------------------------|------------------|
+| GET    | /products       | Obtener todos los productos        | ❌               |
+| GET    | /products/:id   | Obtener un producto por su ID      | ❌               |
+
+
+
+
+
+## 🔧 Instalación y Ejecución
+
+Sigue estos pasos para levantar el proyecto en tu entorno local:
+
+### 1. Clona el repositorio
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+git clone https://github.com/AndresFV13/Agricapital_backend.git
+cd Agricapital_backend
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 2. Instalar dependencias
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm install
+
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 3. Configura las variables de entorno
 
-## Resources
+Copia el archivo `.env.example` a `.env` y ajusta las variables de entorno según tu configuración local.
+```bash
+DB_TYPE=
+DB_HOST=
+DB_PORT=
+DB_USERNAME=
+DB_PASSWORD=
+DB_DATABASE=agro_market
 
-Check out a few resources that may come in handy when working with NestJS:
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### 4. Ejecuta la aplicación
 
-## Support
+```bash
+npm run start:dev
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
-## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
